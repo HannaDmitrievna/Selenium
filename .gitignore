@@ -1,0 +1,17 @@
+# IntelliJ project files
+.idea
+*.iml
+out
+gen
+
+# Java files
+*.class
+*.jar
+hs_err_pid*
+
+# Maven files
+target/
+
+# Other
+*.log
+test-output/
