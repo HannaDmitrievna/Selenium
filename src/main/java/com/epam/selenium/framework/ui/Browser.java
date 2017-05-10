@@ -24,8 +24,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
-import static com.epam.selenium.framework.ui.BrowserType.CHROME;
-import static com.epam.selenium.framework.ui.BrowserType.FIREFOX;
 import static org.openqa.selenium.support.ui.ExpectedConditions.*;
 
 public class Browser implements WrapsDriver{
@@ -94,7 +92,7 @@ public class Browser implements WrapsDriver{
         if (GlobalConfig.getInstance().getSeleniumHub().equals("") || GlobalConfig.getInstance().getSeleniumHub().equals(null))
             return new FirefoxDriver(profile);
         else {
-            DesiredCapabilities capabilities = DesiredCapabilities.firefox();
+            DesiredCapabilities capabilities = BrowserType.FIREFOX.getCapabilities();
             capabilities.setCapability(FirefoxDriver.PROFILE, profile);
             try {
                 return new RemoteWebDriver(new URL(GlobalConfig.getInstance().getSeleniumHub()), capabilities);
@@ -113,11 +111,11 @@ public class Browser implements WrapsDriver{
         prefs.put("download.directory_upgrade", true);
         ChromeOptions options = new ChromeOptions();
         options.setExperimentalOption("prefs", prefs);
-        System.setProperty("webdriver.chrome.driver", "src/main/resources/chromedriver.exe");
+//        System.setProperty("webdriver.chrome.driver", "src/main/resources/chromedriver.exe");
         if (GlobalConfig.getInstance().getSeleniumHub().equals("") || GlobalConfig.getInstance().getSeleniumHub().equals(null))
             return new ChromeDriver(options);
         else {
-            DesiredCapabilities capabilities = DesiredCapabilities.chrome();
+            DesiredCapabilities capabilities = BrowserType.CHROME.getCapabilities();
             capabilities.setCapability(ChromeOptions.CAPABILITY, options);
             try {
                 return new RemoteWebDriver(new URL(GlobalConfig.getInstance().getSeleniumHub()), capabilities);

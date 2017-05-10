@@ -3,7 +3,7 @@ package com.epam.selenium.framework.reporting;
 import org.apache.log4j.Priority;
 
 public class Logger {
-    public static org.apache.log4j.Logger logger = org.apache.log4j.Logger.getLogger("com.gomel.tat.home15");
+    public static org.apache.log4j.Logger logger = org.apache.log4j.Logger.getLogger("com.epam.selenium");
 
     public static void error(String message) {
         logger.error(message);
