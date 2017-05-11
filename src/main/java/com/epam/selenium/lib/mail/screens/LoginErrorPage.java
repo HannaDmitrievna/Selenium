@@ -1,4 +1,4 @@
-package com.epam.selenium.yandex.mail.screen;
+package com.epam.selenium.lib.mail.screens;
 
 import com.epam.selenium.framework.reporting.Logger;
 import com.epam.selenium.framework.screen.BasePage;
