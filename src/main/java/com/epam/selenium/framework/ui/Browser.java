@@ -136,7 +136,6 @@ public class Browser implements WrapsDriver{
 //        screenshot();
     }
 
-
     public void type(WebElement element, String text) {
         Logger.debug("Write text to : " + element.toString() + " text = '" + text + "'");
         waitForElementIsAppear(element, driver);
@@ -156,7 +155,12 @@ public class Browser implements WrapsDriver{
         waitForElementIsAppear(element, driver);
 //        screenshot();
         return element.getText();
+    }
 
+    public void sendKeys(WebElement element, String key) {
+        Logger.debug("Send key " +key+" to element "+element);
+        waitForElementIsAppear(element,driver);
+        element.sendKeys(key);
     }
 
     public void switchTo(WebElement element) {

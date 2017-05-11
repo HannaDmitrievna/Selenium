@@ -1,0 +1,23 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="MailTest">
+    <test name="Saving letter in draft and delete letter test" parallel="classes" thread-count="2">
+        <classes>
+            <class name="com.epam.selenium.tests.mail.SavingLetterInDraftAndDeleteTest"></class>
+        </classes>
+    </test>
+    <test name="Send empty letter test">
+        <classes>
+            <class name="com.epam.selenium.tests.mail.SendEmptyLetterTest"></class>
+        </classes>
+    </test>
+    <test name="Send full letter test">
+        <classes>
+            <class name="com.epam.selenium.tests.mail.SendFullLetterTest"></class>
+        </classes>
+    </test>
+    <test name="Send letter only with address test">
+        <classes>
+            <class name="com.epam.selenium.tests.mail.SendLetterOnlyWithAddressTest"></class>
+        </classes>
+    </test>
+</suite>

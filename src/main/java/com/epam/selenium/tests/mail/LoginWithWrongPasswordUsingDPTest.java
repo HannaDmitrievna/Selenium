@@ -1,6 +1,7 @@
 package com.epam.selenium.tests.mail;
 
 import com.epam.selenium.framework.ui.Browser;
+import com.epam.selenium.lib.common.CommonConstants;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -9,6 +10,7 @@ import org.testng.annotations.Test;
 
 import static com.epam.selenium.lib.mail.services.LoginService.enterWithWrongPasswordFromDataProvider;
 import static com.epam.selenium.lib.mail.services.LoginService.getErrorMessage;
+import static com.epam.selenium.lib.mail.services.LoginService.getErrorMessageFromPassportPage;
 
 public class LoginWithWrongPasswordUsingDPTest extends BaseMailTest {
 
@@ -17,7 +19,7 @@ public class LoginWithWrongPasswordUsingDPTest extends BaseMailTest {
     @BeforeMethod(description = "Preparing browser")
     public void preparingBrowser() {
         browser = Browser.rise();
-        browser.open(System.getProperty("yandex.mail.link"));
+        browser.open(CommonConstants.YANDEX_MAIL_START_PAGE);
     }
 
     @Test(dataProvider = "valuesDp", description = "Check expected error message in case of wrong password")
