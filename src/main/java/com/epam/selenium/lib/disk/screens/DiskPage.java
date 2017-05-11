@@ -10,7 +10,7 @@ import org.openqa.selenium.support.FindBy;
 
 import java.util.List;
 
-public class DiskPage extends BasePage{
+public class DiskPage extends BasePage {
     @FindBy(className = "button-upload__attach")
     WebElement attachButton;
 

@@ -26,7 +26,7 @@ import java.util.concurrent.TimeUnit;
 
 import static org.openqa.selenium.support.ui.ExpectedConditions.*;
 
-public class Browser implements WrapsDriver{
+public class Browser implements WrapsDriver {
     public static final byte COMMON_ELEMENT_WAIT_TIME_OUT = 15;
     public static final byte DRIVER_PAGE_LOAD_TIMEOUT_SECONDS = 20;
     private WebDriver driver;
@@ -158,8 +158,8 @@ public class Browser implements WrapsDriver{
     }
 
     public void sendKeys(WebElement element, String key) {
-        Logger.debug("Send key " +key+" to element "+element);
-        waitForElementIsAppear(element,driver);
+        Logger.debug("Send key " + key + " to element " + element);
+        waitForElementIsAppear(element, driver);
         element.sendKeys(key);
     }
 

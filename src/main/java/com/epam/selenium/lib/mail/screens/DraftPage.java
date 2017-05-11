@@ -27,7 +27,7 @@ public class DraftPage extends BasePage {
         browser.click(browser.getWrappedDriver().findElement(By.xpath(String.format(CHECKBOX_LOCATOR_PATTERN, subject))));
     }
 
-    public void  clickDelete() {
+    public void clickDelete() {
         Logger.debug("Deleting letter");
         browser.click(deleteButton);
     }
