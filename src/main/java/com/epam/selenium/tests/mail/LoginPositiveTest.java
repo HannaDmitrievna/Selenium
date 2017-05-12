@@ -12,6 +12,6 @@ public class LoginPositiveTest extends BaseMailTest {
     @Test(description = "Positive Login TestParameters")
     public void checkPositiveLogin() {
         enterWithRightCredential();
-        Assert.assertEquals(getUserEmail(), getDefaultAccount().getEmail());
+        Assert.assertEquals(getUserEmail(), getDefaultAccount().getLogin());
     }
 }

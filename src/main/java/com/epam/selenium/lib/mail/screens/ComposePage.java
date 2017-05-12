@@ -6,10 +6,10 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 public class ComposePage extends BasePage {
-    @FindBy(xpath = "//*[@data-params='field=to']//ancestor::tr//input[@type='text']")
+    @FindBy(className = "js-suggest-proxy _init ui-autocomplete-input")
     WebElement addressInput;
 
-    @FindBy(name = "subj")
+    @FindBy(className = "mail-Compose-Field-Input-Controller js-compose-field js-editor-tabfocus-prev")
     WebElement subjectInput;
 
     @FindBy(css = "body#tinymce")

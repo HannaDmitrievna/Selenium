@@ -1,9 +1,11 @@
 package com.epam.selenium.lib.mail.services;
 
 import com.epam.selenium.framework.reporting.Logger;
+import com.epam.selenium.lib.common.AccountBuilder;
 import com.epam.selenium.lib.mail.screens.InboxPage;
 import com.epam.selenium.lib.mail.screens.LoginErrorPage;
 import com.epam.selenium.lib.mail.screens.LoginPage;
+import com.epam.selenium.lib.mail.screens.PassportPage;
 import org.openqa.selenium.support.PageFactory;
 
 import static com.epam.selenium.framework.ui.Browser.current;
@@ -50,6 +52,12 @@ public class LoginService {
     public static String getErrorMessage() {
         Logger.info("Getting error message");
         LoginErrorPage loginErrorPage = PageFactory.initElements(current().getWrappedDriver(), LoginErrorPage.class);
+        return loginErrorPage.getErrorMassage();
+    }
+
+    public static String getErrorMessageFromPassportPage() {
+        Logger.info("Getting error message");
+        PassportPage loginErrorPage = PageFactory.initElements(current().getWrappedDriver(), PassportPage.class);
         return loginErrorPage.getErrorMassage();
     }
 }

@@ -25,5 +25,7 @@ public class UploadFileTest extends BaseDiskTest {
     }
 
     @AfterMethod(description = "Deleting file")
-    public void deleteFile() { FileService.deleteFile(PATH_TO_UPLOAD_FILE_DIRECTORY + fileName); }
+    public void deleteFile() {
+        FileService.deleteFile(PATH_TO_UPLOAD_FILE_DIRECTORY + fileName);
+    }
 }

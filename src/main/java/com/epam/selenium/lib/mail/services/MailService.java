@@ -73,10 +73,9 @@ public class MailService {
         DraftPage draftPage = PageFactory.initElements(current().getWrappedDriver(), DraftPage.class);
         composePage.isSavingNotificationPresent();
         draftPage.open();
-        if(draftPage.isLetterPresent(subject)) {
+        if (draftPage.isLetterPresent(subject)) {
             return deleteLetterAndCheckIt(subject);
-        }
-        else
+        } else
             return false;
     }
 
@@ -88,8 +87,7 @@ public class MailService {
         draftPage.clickDelete();
         try {
             isLetterInDraftAfterDeleting = draftPage.isLetterPresent(subject);
-        }
-        catch (Exception ex) {
+        } catch (Exception ex) {
             isLetterInDraftAfterDeleting = false;
         }
         TrashPage trashPage = PageFactory.initElements(current().getWrappedDriver(), TrashPage.class);
@@ -98,8 +96,7 @@ public class MailService {
         trashPage.confirmClearingTrash();
         try {
             isLetterInTrashAfterDeleting = trashPage.isLetterPresent(subject);
-        }
-        catch (Exception ex) {
+        } catch (Exception ex) {
             isLetterInTrashAfterDeleting = false;
         }
         if (isLetterInDraftAfterDeleting == false && isLetterInTrash == true && isLetterInTrashAfterDeleting == false)

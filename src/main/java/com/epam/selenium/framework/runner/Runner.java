@@ -57,7 +57,7 @@ public class Runner {
                 suites.addAll(new Parser(suitePath).parse());
             }
         }
-        for(XmlSuite xmlSuite : suites) {
+        for (XmlSuite xmlSuite : suites) {
             testNG.setCommandLineSuite(xmlSuite);
         }
     }
@@ -71,7 +71,7 @@ public class Runner {
 //            add(new ParallelSuitesListener());
 //            add(new TestPreconditionListener());
         }};
-        for(ITestNGListener listener : listeners) {
+        for (ITestNGListener listener : listeners) {
             testNG.addListener(listener);
         }
     }

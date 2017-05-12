@@ -1,0 +1,9 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+
+<suite name="AllTestsSuite" verbose="1" parallel="true" thread-count="2">
+    <suite-files>
+        <suite-file path="MailLoginSuite.xml"/>
+        <suite-file path="MailSuite.xml"/>
+        <suite-file path="DiskSuite.xml"/>
+    </suite-files>
+</suite>

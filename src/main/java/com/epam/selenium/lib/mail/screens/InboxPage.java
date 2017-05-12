@@ -6,8 +6,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-public class InboxPage extends BasePage{
-    @FindBy(css = ".header-user-name.js-header-user-name")
+public class InboxPage extends BasePage {
+    @FindBy(css = ".mail-User-Name")
     WebElement userEmailLocator;
 
     @FindBy(xpath = "//a[@href='#compose']")
@@ -15,7 +15,7 @@ public class InboxPage extends BasePage{
 
     public String getUserEmail() {
         Logger.debug("Getting user email");
-        return userEmailLocator.getText();
+        return browser.getText(userEmailLocator);
     }
 
     public void goToLetterForm() {

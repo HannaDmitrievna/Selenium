@@ -5,9 +5,9 @@ import com.epam.selenium.framework.utils.Randomizer;
 public class AccountBuilder {
     public static Account getDefaultAccount() {
         Account account = new Account();
-        account.setLogin(System.getProperty("yandex.login"));
-        account.setPassword(System.getProperty("yandex.password"));
-        account.setEmail(System.getProperty("mail.to.send"));
+        account.setLogin(CommonConstants.LOGIN_YANDEX);
+        account.setPassword(CommonConstants.PASSWORD_YANDEX);
+        account.setEmail(CommonConstants.DEFAULT_MAIL_TO_SEND);
         return account;
     }
 

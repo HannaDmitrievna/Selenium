@@ -10,8 +10,8 @@ import org.openqa.selenium.support.FindBy;
 
 import java.util.List;
 
-public class DiskPage extends BasePage{
-    @FindBy(css = ".button__attach")
+public class DiskPage extends BasePage {
+    @FindBy(className = "button-upload__attach")
     WebElement attachButton;
 
     @FindBy(css = ".b-item-upload__icon.b-item-upload__icon_done")
@@ -46,10 +46,9 @@ public class DiskPage extends BasePage{
         browser.refresh();
     }
 
-
     public void attachFile(String path) {
         Logger.debug("Attaching file: " + path);
-        attachButton.sendKeys(path);
+        browser.sendKeys(attachButton, path);
     }
 
     public void waitUploadForNotification() {

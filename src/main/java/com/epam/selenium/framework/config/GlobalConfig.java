@@ -13,13 +13,13 @@ public class GlobalConfig {
     @Option(name = "-bt", usage = "browser type: firefox or chrome")
     private BrowserType browserType = BrowserType.FIREFOX;
 
-    @Option(name="-suites", usage = "list of pathes to suites", handler = StringArrayOptionHandler.class, required = true)
+    @Option(name = "-suites", usage = "list of pathes to suites", handler = StringArrayOptionHandler.class, required = true)
     private List<String> suites = null;
 
     @Option(name = "-pm", usage = "parallel mode: false or tests")
     private XmlSuite.ParallelMode parallelMode = XmlSuite.ParallelMode.FALSE;
 
-    @Option(name="-tc", usage = "amount of threads for parallel execution, equal to 0 by default")
+    @Option(name = "-tc", usage = "amount of threads for parallel execution, equal to 0 by default")
     private int threadCount = 0;
 
     @Option(name = "-hub", usage = "selenium hub")
@@ -29,7 +29,7 @@ public class GlobalConfig {
     private String resultDir = "results";
 
     public static GlobalConfig getInstance() {
-        if(instance == null) {
+        if (instance == null) {
             instance = new GlobalConfig();
         }
         return instance;
