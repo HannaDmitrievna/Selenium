@@ -8,10 +8,10 @@ import org.openqa.selenium.support.FindBy;
 
 public class InboxPage extends BasePage {
     @FindBy(css = ".mail-User-Name")
-    WebElement userEmailLocator;
+    private WebElement userEmailLocator;
 
     @FindBy(xpath = "//a[@href='#compose']")
-    WebElement writeNewLetterLink;
+    private WebElement writeNewLetterLink;
 
     public String getUserEmail() {
         Logger.debug("Getting user email");

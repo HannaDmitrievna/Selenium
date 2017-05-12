@@ -1,6 +1,6 @@
 package com.epam.selenium.framework.runner;
 
-import com.epam.selenium.framework.listeners.ParallelSuitesExcecutionListener;
+import com.epam.selenium.framework.listeners.ParallelSuitesExecutionListener;
 import com.epam.selenium.framework.reporting.Logger;
 import org.kohsuke.args4j.CmdLineException;
 import org.kohsuke.args4j.CmdLineParser;
@@ -66,7 +66,7 @@ public class Runner {
         testNG.setUseDefaultListeners(false);
         List<ITestNGListener> listeners = new ArrayList<ITestNGListener>() {{
 //            add(new ExtentReportListener());
-            add(new ParallelSuitesExcecutionListener());
+            add(new ParallelSuitesExecutionListener());
 //            add(new TestNgLoggerListener());
 //            add(new ParallelSuitesListener());
 //            add(new TestPreconditionListener());

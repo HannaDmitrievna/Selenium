@@ -6,16 +6,14 @@ public enum BrowserType {
     CHROME("chrome") {
         @Override
         public DesiredCapabilities getCapabilities() {
-            DesiredCapabilities capabilities = DesiredCapabilities.chrome();
-            return capabilities;
+            return DesiredCapabilities.chrome();
         }
     },
 
     FIREFOX("firefox") {
         @Override
         public DesiredCapabilities getCapabilities() {
-            DesiredCapabilities capabilities = DesiredCapabilities.firefox();
-            return capabilities;
+            return DesiredCapabilities.firefox();
         }
     };
 
@@ -31,7 +29,7 @@ public enum BrowserType {
                 return type;
             }
         }
-        throw new IllegalArgumentException(String.format("Incorrect alias " + value + " of browser type"));
+        throw new IllegalArgumentException(String.format("Incorrect alias %s of browser type", value));
     }
 
     public abstract DesiredCapabilities getCapabilities();

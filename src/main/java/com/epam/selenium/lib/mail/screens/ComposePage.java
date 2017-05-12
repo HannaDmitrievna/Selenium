@@ -7,25 +7,25 @@ import org.openqa.selenium.support.FindBy;
 
 public class ComposePage extends BasePage {
     @FindBy(className = "js-suggest-proxy _init ui-autocomplete-input")
-    WebElement addressInput;
+    private WebElement addressInput;
 
     @FindBy(className = "mail-Compose-Field-Input-Controller js-compose-field js-editor-tabfocus-prev")
-    WebElement subjectInput;
+    private WebElement subjectInput;
 
     @FindBy(css = "body#tinymce")
-    WebElement postInput;
+    private WebElement postInput;
 
     @FindBy(id = "compose-send_ifr")
-    WebElement postFrame;
+    private WebElement postFrame;
 
     @FindBy(id = "compose-submit")
-    WebElement submitButton;
+    private WebElement submitButton;
 
     @FindBy(css = "div[data-compose-type='letter postcard'] .b-compose-message__actions__helper_saved")
-    WebElement savingNotification;
+    private WebElement savingNotification;
 
     @FindBy(css = "span.b-notification__i")
-    WebElement notification;
+    private WebElement notification;
 
     public void enterAddress(String email) {
         Logger.debug("Entering email: " + email);
@@ -49,7 +49,7 @@ public class ComposePage extends BasePage {
 
     public void switchToMainFrame() {
         Logger.debug("Switching to main frame");
-        browser.current().getWrappedDriver().switchTo().defaultContent();
+        browser.getWrappedDriver().switchTo().defaultContent();
     }
 
     public void clickOnSendButton() {

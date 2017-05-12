@@ -8,7 +8,7 @@ import org.openqa.selenium.support.FindBy;
 
 public class PassportPage extends BasePage {
     @FindBy(className = "passport-Domik-Form-Error passport-Domik-Form-Error_active")
-    WebElement errorMessage;
+    private WebElement errorMessage;
 
     public String getErrorMassage() {
         Logger.debug("Getting error message");

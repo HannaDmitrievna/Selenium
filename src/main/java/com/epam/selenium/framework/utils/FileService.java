@@ -22,7 +22,7 @@ public class FileService {
         try (FileWriter writer = new FileWriter(file, false)) {
             writer.write(RandomStringUtils.randomAlphabetic(10));
         } catch (IOException ex) {
-            System.out.println(ex.getMessage());
+            Logger.error(ex.getMessage(), ex);
         }
         return fileName;
     }
@@ -32,7 +32,7 @@ public class FileService {
         try {
             Files.delete(Paths.get(file));
         } catch (IOException e) {
-            e.printStackTrace();
+            Logger.error(e.getMessage(), e);
         }
     }
 

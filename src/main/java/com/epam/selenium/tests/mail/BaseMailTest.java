@@ -6,6 +6,7 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 
 public class BaseMailTest {
+
     Browser browser;
 
     @BeforeClass(description = "Preparing browser")

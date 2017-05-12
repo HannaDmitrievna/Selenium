@@ -4,7 +4,7 @@ import com.epam.selenium.framework.config.GlobalConfig;
 import org.testng.ISuite;
 import org.testng.ISuiteListener;
 
-public class ParallelSuitesExcecutionListener implements ISuiteListener {
+public class ParallelSuitesExecutionListener implements ISuiteListener {
     @Override
     public void onStart(ISuite suite) {
         suite.getXmlSuite().setParallel(GlobalConfig.getInstance().getParallelMode());
@@ -13,5 +13,6 @@ public class ParallelSuitesExcecutionListener implements ISuiteListener {
 
     @Override
     public void onFinish(ISuite suite) {
+        // do nothing
     }
 }

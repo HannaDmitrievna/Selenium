@@ -1,6 +1,7 @@
 package com.epam.selenium.lib.common;
 
 public class Account {
+    
     private String login;
     private String password;
     private String email;

@@ -14,7 +14,7 @@ import static com.epam.selenium.lib.disk.services.DiskService.uploadFile;
 
 public class DownloadFileTest extends BaseDiskTest {
 
-    protected String fileName;
+    private String fileName;
 
     @BeforeClass(description = "Create and file")
     public void createAndUploadFile() {

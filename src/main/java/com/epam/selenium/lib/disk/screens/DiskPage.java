@@ -12,29 +12,28 @@ import java.util.List;
 
 public class DiskPage extends BasePage {
     @FindBy(className = "button-upload__attach")
-    WebElement attachButton;
+    private WebElement attachButton;
 
     @FindBy(css = ".b-item-upload__icon.b-item-upload__icon_done")
-    WebElement uploadNotification;
+    private WebElement uploadNotification;
 
     @FindBy(css = "._nb-popup-close.ns-action.js-cross")
-    WebElement closeUploadPopup;
+    private WebElement closeUploadPopup;
 
     @FindBy(className = "header__title")
-    WebElement mainPageLink;
+    private WebElement mainPageLink;
 
     @FindBy(className = "nb-resource__text-name")
-    List<WebElement> existingFiles;
+    private List<WebElement> existingFiles;
 
     @FindBy(css = ".notifications__item.nb-island.notifications__item_moved")
-    WebElement deleteNotification;
+    private WebElement deleteNotification;
 
     @FindBy(xpath = "//div[@data-id='/trash']")
-    WebElement trashLocator;
+    private WebElement trashLocator;
 
-    Actions action;
-
-    WebElement element;
+    private Actions action;
+    private WebElement element;
 
     public void open() {
         Logger.info("Open disk page");

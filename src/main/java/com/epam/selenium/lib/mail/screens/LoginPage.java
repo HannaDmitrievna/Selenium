@@ -7,13 +7,13 @@ import org.openqa.selenium.support.FindBy;
 
 public class LoginPage extends BasePage {
     @FindBy(name = "login")
-    WebElement loginInput;
+    private WebElement loginInput;
 
     @FindBy(name = "passwd")
-    WebElement passwordInput;
+    private WebElement passwordInput;
 
     @FindBy(css = ".domik2__submit button")
-    WebElement enterButton;
+    private WebElement enterButton;
 
     public void enterLogin(String email) {
         Logger.debug("Enter login " + email);

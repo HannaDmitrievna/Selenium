@@ -7,7 +7,8 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 
 public class BaseDiskTest {
-    Browser browser;
+
+    private Browser browser;
 
     @BeforeClass(description = "Preparing browser")
     public void preparingBrowser() {

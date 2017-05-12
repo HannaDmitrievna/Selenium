@@ -7,7 +7,7 @@ import org.openqa.selenium.support.FindBy;
 
 public class ConfirmPage extends BasePage {
     @FindBy(xpath = "//a[@class='b-statusline__link']")
-    WebElement confirmationMessage;
+    private WebElement confirmationMessage;
 
     public String returnLetterLink() {
         Logger.debug("Return letter link");

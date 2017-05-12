@@ -8,7 +8,7 @@ import org.openqa.selenium.support.FindBy;
 
 public class LoginErrorPage extends BasePage {
     @FindBy(className = "error-msg")
-    WebElement errorMessage;
+    private WebElement errorMessage;
 
     public String getErrorMassage() {
         Logger.debug("Getting error message");

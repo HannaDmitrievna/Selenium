@@ -8,20 +8,20 @@ import org.openqa.selenium.support.FindBy;
 
 public class TrashPage extends BasePage {
     @FindBy(css = ".b-folders__folder__info img")
-    WebElement clearTrash;
+    private WebElement clearTrash;
 
     @FindBy(css = "div.b-popup__confirm button")
-    WebElement confirmClearTrash;
+    private WebElement confirmClearTrash;
 
     @FindBy(xpath = "//a[@href='#trash']")
-    WebElement trashPageLink;
+    private WebElement trashPageLink;
 
     public void open() {
         Logger.debug("Opening trash");
         browser.click(trashPageLink);
     }
 
-    private final String SUBJECT_LOCATOR_PATTERN = "span[title='%s']";
+    private static final String SUBJECT_LOCATOR_PATTERN = "span[title='%s']";
 
     public boolean isLetterPresent(String subject) {
         Logger.debug("Checking presenting letter with subject " + subject + " in trash");

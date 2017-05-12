@@ -12,7 +12,7 @@ import java.util.List;
 
 public class RemoveSomeFilesTest extends BaseDiskTest {
 
-    List<String> fileNameList = new LinkedList<>();
+    private List<String> fileNameList = new LinkedList<>();
 
     @BeforeClass(description = "Create file")
     public void createFile() {

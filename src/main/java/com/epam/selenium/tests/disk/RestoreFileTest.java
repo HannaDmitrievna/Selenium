@@ -11,7 +11,7 @@ import static com.epam.selenium.lib.disk.services.DiskService.*;
 
 public class RestoreFileTest extends BaseDiskTest {
 
-    protected String fileName;
+    private String fileName;
 
     @BeforeClass(description = "Create file")
     public void createFile() {

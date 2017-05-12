@@ -8,13 +8,13 @@ import org.openqa.selenium.support.FindBy;
 
 public class DraftPage extends BasePage {
     @FindBy(css = "[data-action='delete']")
-    WebElement deleteButton;
+    private WebElement deleteButton;
 
     @FindBy(css = "a[href$='#draft']")
-    WebElement draftPageLink;
+    private WebElement draftPageLink;
 
-    private final String CHECKBOX_LOCATOR_PATTERN = "//*[@title='%s']/../../../../../../label/input[@type='checkbox']";
-    private final String SUBJECT_LOCATOR_PATTERN = "span[title='%s']";
+    private static final String CHECKBOX_LOCATOR_PATTERN = "//*[@title='%s']/../../../../../../label/input[@type='checkbox']";
+    private static final String SUBJECT_LOCATOR_PATTERN = "span[title='%s']";
 
     public void open() {
         Logger.debug("Open draft page");

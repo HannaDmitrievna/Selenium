@@ -10,21 +10,21 @@ import java.util.List;
 
 public class TrashPage extends BasePage {
     @FindBy(css = "div[data-id='trash'] a[href$='/trash']")
-    WebElement trashLink;
+    private WebElement trashLink;
 
     @FindBy(css = "div.b-toolset__buttons button[data-click-action=\"trash.clean\"]")
-    WebElement clearTrash;
+    private WebElement clearTrash;
 
     @FindBy(css = "button.nb-button._nb-small-action-button._init.b-confirmation__action.b-confirmation__action_right.js-confirmation-accept")
-    WebElement confirmClearingTrash;
+    private WebElement confirmClearingTrash;
 
     @FindBy(className = "nb-resource__text-name")
-    List<WebElement> existingFiles;
+    private List<WebElement> existingFiles;
 
     @FindBy(className = "notifications__text")
-    WebElement restoreNotification;
+    private WebElement restoreNotification;
 
-    private final String BUTTON_CHOOSE_PATTERN = "button[data-params='{\"id\":\"/trash/%s\"}']";
+    private static final String BUTTON_CHOOSE_PATTERN = "button[data-params='{\"id\":\"/trash/%s\"}']";
 
     public void open() {
         Logger.debug("Opening trash");

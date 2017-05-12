@@ -11,7 +11,8 @@ import static com.epam.selenium.lib.disk.services.DiskService.isFilePresentAtDis
 import static com.epam.selenium.lib.disk.services.DiskService.uploadFile;
 
 public class UploadFileTest extends BaseDiskTest {
-    protected String fileName;
+
+    private String fileName;
 
     @BeforeMethod(description = "Create file")
     public void createFile() {

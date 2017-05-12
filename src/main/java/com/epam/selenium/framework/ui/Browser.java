@@ -13,22 +13,21 @@ import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.internal.WrapsDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.HashMap;
-import java.util.Hashtable;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
-import static org.openqa.selenium.support.ui.ExpectedConditions.*;
+import static org.openqa.selenium.support.ui.ExpectedConditions.elementToBeClickable;
+import static org.openqa.selenium.support.ui.ExpectedConditions.visibilityOf;
 
 public class Browser implements WrapsDriver {
-    public static final byte COMMON_ELEMENT_WAIT_TIME_OUT = 15;
-    public static final byte DRIVER_PAGE_LOAD_TIMEOUT_SECONDS = 20;
+    private static final byte COMMON_ELEMENT_WAIT_TIME_OUT = 15;
+    private static final byte DRIVER_PAGE_LOAD_TIMEOUT_SECONDS = 20;
     private WebDriver driver;
     private static Map<Thread, Browser> instances = new HashMap<>();
 
@@ -65,7 +64,8 @@ public class Browser implements WrapsDriver {
                 wrappedDriver.quit();
             }
         } catch (Exception ignore) {
-        } finally {
+			Logger.error(ignore.getMessage(), ignore);
+		} finally {
             instances.remove(Thread.currentThread());
         }
     }
@@ -89,7 +89,7 @@ public class Browser implements WrapsDriver {
         profile.setPreference("browser.download.manager.showWhenStarting", false);
         profile.setPreference("browser.download.folderList", 2);
         profile.setPreference("browser.helperApps.neverAsk.saveToDisk", "text/plain");
-        if (GlobalConfig.getInstance().getSeleniumHub().equals("") || GlobalConfig.getInstance().getSeleniumHub().equals(null))
+        if ("".equals(GlobalConfig.getInstance().getSeleniumHub()) || GlobalConfig.getInstance().getSeleniumHub() == null)
             return new FirefoxDriver(profile);
         else {
             DesiredCapabilities capabilities = BrowserType.FIREFOX.getCapabilities();
@@ -97,22 +97,21 @@ public class Browser implements WrapsDriver {
             try {
                 return new RemoteWebDriver(new URL(GlobalConfig.getInstance().getSeleniumHub()), capabilities);
             } catch (MalformedURLException e) {
-                e.printStackTrace();
-                return new FirefoxDriver(profile);
+                Logger.error(e.getMessage(), e);
+            	return new FirefoxDriver(profile);
             }
         }
     }
 
     private WebDriver localChromeDriver() {
-        Map<String, Object> prefs = new Hashtable<>();
+        Map<String, Object> prefs = new HashMap<>();
         prefs.put("profile.default_content_settings.popups", 0);
         prefs.put("download.prompt_for_download", "false");
         prefs.put("download.default_directory", FileService.PATH_FOR_DOWNLOADING);
         prefs.put("download.directory_upgrade", true);
         ChromeOptions options = new ChromeOptions();
         options.setExperimentalOption("prefs", prefs);
-//        System.setProperty("webdriver.chrome.driver", "src/main/resources/chromedriver.exe");
-        if (GlobalConfig.getInstance().getSeleniumHub().equals("") || GlobalConfig.getInstance().getSeleniumHub().equals(null))
+        if ("".equals(GlobalConfig.getInstance().getSeleniumHub()) || GlobalConfig.getInstance().getSeleniumHub() == null)
             return new ChromeDriver(options);
         else {
             DesiredCapabilities capabilities = BrowserType.CHROME.getCapabilities();
@@ -120,7 +119,7 @@ public class Browser implements WrapsDriver {
             try {
                 return new RemoteWebDriver(new URL(GlobalConfig.getInstance().getSeleniumHub()), capabilities);
             } catch (MalformedURLException e) {
-                e.printStackTrace();
+            	Logger.error(e.getMessage(), e);
                 return new ChromeDriver(options);
             }
         }

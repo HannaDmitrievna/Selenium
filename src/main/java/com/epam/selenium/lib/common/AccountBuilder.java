@@ -3,6 +3,7 @@ package com.epam.selenium.lib.common;
 import com.epam.selenium.framework.utils.Randomizer;
 
 public class AccountBuilder {
+    
     public static Account getDefaultAccount() {
         Account account = new Account();
         account.setLogin(CommonConstants.LOGIN_YANDEX);

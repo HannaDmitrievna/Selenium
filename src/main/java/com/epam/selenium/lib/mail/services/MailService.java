@@ -32,7 +32,7 @@ public class MailService {
         composePage.clickOnSendButton();
     }
 
-    public static void wrightLetter() {
+    private static void wrightLetter() {
         Logger.info("Wrighting letter");
         InboxPage inboxPage = PageFactory.initElements(current().getWrappedDriver(), InboxPage.class);
         inboxPage.goToLetterForm();
@@ -73,21 +73,21 @@ public class MailService {
         DraftPage draftPage = PageFactory.initElements(current().getWrappedDriver(), DraftPage.class);
         composePage.isSavingNotificationPresent();
         draftPage.open();
-        if (draftPage.isLetterPresent(subject)) {
-            return deleteLetterAndCheckIt(subject);
-        } else
-            return false;
+        return draftPage.isLetterPresent(subject) && deleteLetterAndCheckIt(subject);
     }
 
-    public static boolean deleteLetterAndCheckIt(String subject) {
+    private static boolean deleteLetterAndCheckIt(String subject) {
         Logger.info("Deleting letter");
-        boolean isLetterInDraftAfterDeleting, isLetterInTrash, isLetterInTrashAfterDeleting;
+        boolean isLetterInDraftAfterDeleting;
+        boolean isLetterInTrash;
+        boolean isLetterInTrashAfterDeleting;
         DraftPage draftPage = PageFactory.initElements(current().getWrappedDriver(), DraftPage.class);
         draftPage.selectCheckbox(subject);
         draftPage.clickDelete();
         try {
             isLetterInDraftAfterDeleting = draftPage.isLetterPresent(subject);
         } catch (Exception ex) {
+            Logger.error(ex.getMessage(), ex);
             isLetterInDraftAfterDeleting = false;
         }
         TrashPage trashPage = PageFactory.initElements(current().getWrappedDriver(), TrashPage.class);
@@ -97,11 +97,9 @@ public class MailService {
         try {
             isLetterInTrashAfterDeleting = trashPage.isLetterPresent(subject);
         } catch (Exception ex) {
+            Logger.error(ex.getMessage(), ex);
             isLetterInTrashAfterDeleting = false;
         }
-        if (isLetterInDraftAfterDeleting == false && isLetterInTrash == true && isLetterInTrashAfterDeleting == false)
-            return true;
-        else
-            return false;
+        return !isLetterInDraftAfterDeleting && isLetterInTrash && !isLetterInTrashAfterDeleting;
     }
 }
