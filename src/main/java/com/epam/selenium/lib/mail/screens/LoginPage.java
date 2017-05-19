@@ -12,7 +12,7 @@ public class LoginPage extends BasePage {
     @FindBy(name = "passwd")
     private WebElement passwordInput;
 
-    @FindBy(css = ".domik2__submit button")
+    @FindBy(xpath = "//div[@class='domik2__submit']/button")
     private WebElement enterButton;
 
     public void enterLogin(String email) {

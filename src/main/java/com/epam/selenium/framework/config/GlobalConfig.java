@@ -11,7 +11,7 @@ public class GlobalConfig {
     private static GlobalConfig instance;
 
     @Option(name = "-bt", usage = "browser type: firefox or chrome")
-    private BrowserType browserType = BrowserType.FIREFOX;
+    private BrowserType browserType = BrowserType.CHROME;
 
     @Option(name = "-suites", usage = "list of pathes to suites", handler = StringArrayOptionHandler.class, required = true)
     private List<String> suites = null;

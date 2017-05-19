@@ -2,22 +2,22 @@
 <suite name="MailLoginTest">
     <test name="Login positive test" parallel="classes" thread-count="2">
         <classes>
-            <class name="com.epam.selenium.tests.mail.LoginPositiveTest"></class>
+            <class name="com.epam.selenium.tests.mail.LoginPositiveTest"/>
         </classes>
     </test>
     <test name="Login with wrong credential test">
         <classes>
-            <class name="com.epam.selenium.tests.mail.LoginWithWrongCredentialTest"></class>
+            <class name="com.epam.selenium.tests.mail.LoginWithWrongCredentialTest"/>
         </classes>
     </test>
     <test name="Login with wrong password test">
         <classes>
-            <class name="com.epam.selenium.tests.mail.LoginWithWrongPasswordTest"></class>
+            <class name="com.epam.selenium.tests.mail.LoginWithWrongPasswordTest"/>
         </classes>
     </test>
     <test name="Login with wrong password test using data provider">
         <classes>
-            <class name="com.epam.selenium.tests.mail.LoginWithWrongPasswordUsingDPTest"></class>
+            <class name="com.epam.selenium.tests.mail.LoginWithWrongPasswordUsingDPTest"/>
         </classes>
     </test>
 </suite>

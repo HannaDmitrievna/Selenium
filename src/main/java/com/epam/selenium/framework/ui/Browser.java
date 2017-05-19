@@ -2,14 +2,11 @@ package com.epam.selenium.framework.ui;
 
 import com.epam.selenium.framework.config.GlobalConfig;
 import com.epam.selenium.framework.reporting.Logger;
-import com.epam.selenium.framework.utils.FileService;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.internal.WrapsDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
@@ -84,43 +81,46 @@ public class Browser implements WrapsDriver {
     }
 
     private WebDriver localFirefoxDriver() {
-        FirefoxProfile profile = new FirefoxProfile();
-        profile.setPreference("browser.download.dir", FileService.PATH_FOR_DOWNLOADING);
-        profile.setPreference("browser.download.manager.showWhenStarting", false);
-        profile.setPreference("browser.download.folderList", 2);
-        profile.setPreference("browser.helperApps.neverAsk.saveToDisk", "text/plain");
+//        FirefoxProfile profile = new FirefoxProfile();
+//        profile.setPreference("browser.download.dir", FileService.PATH_FOR_DOWNLOADING);
+//        profile.setPreference("browser.download.manager.showWhenStarting", false);
+//        profile.setPreference("browser.download.folderList", 2);
+//        profile.setPreference("browser.helperApps.neverAsk.saveToDisk", "text/plain");
         if ("".equals(GlobalConfig.getInstance().getSeleniumHub()) || GlobalConfig.getInstance().getSeleniumHub() == null)
-            return new FirefoxDriver(profile);
+//            return new FirefoxDriver(profile);
+            return new FirefoxDriver(DesiredCapabilities.firefox());
         else {
-            DesiredCapabilities capabilities = BrowserType.FIREFOX.getCapabilities();
-            capabilities.setCapability(FirefoxDriver.PROFILE, profile);
+//            DesiredCapabilities capabilities = BrowserType.FIREFOX.getCapabilities();
+//            capabilities.setCapability(FirefoxDriver.PROFILE, profile);
             try {
-                return new RemoteWebDriver(new URL(GlobalConfig.getInstance().getSeleniumHub()), capabilities);
+                return new RemoteWebDriver(new URL(GlobalConfig.getInstance().getSeleniumHub()), DesiredCapabilities.firefox());
             } catch (MalformedURLException e) {
                 Logger.error(e.getMessage(), e);
-            	return new FirefoxDriver(profile);
+                throw new RuntimeException(e.getMessage(), e);
+//            	return new FirefoxDriver();
             }
         }
     }
 
     private WebDriver localChromeDriver() {
-        Map<String, Object> prefs = new HashMap<>();
-        prefs.put("profile.default_content_settings.popups", 0);
-        prefs.put("download.prompt_for_download", "false");
-        prefs.put("download.default_directory", FileService.PATH_FOR_DOWNLOADING);
-        prefs.put("download.directory_upgrade", true);
-        ChromeOptions options = new ChromeOptions();
-        options.setExperimentalOption("prefs", prefs);
+//        Map<String, Object> prefs = new HashMap<>();
+//        prefs.put("profile.default_content_settings.popups", 0);
+//        prefs.put("download.prompt_for_download", "false");
+//        prefs.put("download.default_directory", FileService.PATH_FOR_DOWNLOADING);
+//        prefs.put("download.directory_upgrade", true);
+//        ChromeOptions options = new ChromeOptions();
+//        options.setExperimentalOption("prefs", prefs);
         if ("".equals(GlobalConfig.getInstance().getSeleniumHub()) || GlobalConfig.getInstance().getSeleniumHub() == null)
-            return new ChromeDriver(options);
+            return new ChromeDriver(DesiredCapabilities.chrome());
         else {
-            DesiredCapabilities capabilities = BrowserType.CHROME.getCapabilities();
-            capabilities.setCapability(ChromeOptions.CAPABILITY, options);
+//            DesiredCapabilities capabilities = BrowserType.CHROME.getCapabilities();
+//            capabilities.setCapability(ChromeOptions.CAPABILITY, options);
             try {
-                return new RemoteWebDriver(new URL(GlobalConfig.getInstance().getSeleniumHub()), capabilities);
+                return new RemoteWebDriver(new URL(GlobalConfig.getInstance().getSeleniumHub()), DesiredCapabilities.chrome());
             } catch (MalformedURLException e) {
             	Logger.error(e.getMessage(), e);
-                return new ChromeDriver(options);
+            	throw new RuntimeException(e.getMessage(), e);
+//                return new ChromeDriver(options);
             }
         }
     }
