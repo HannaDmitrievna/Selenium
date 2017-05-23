@@ -2,22 +2,22 @@
 <suite name="MailTest">
     <test name="Saving letter in draft and delete letter test" parallel="classes" thread-count="2">
         <classes>
-            <class name="com.epam.selenium.tests.mail.SavingLetterInDraftAndDeleteTest"></class>
+            <class name="com.epam.selenium.tests.mail.SavingLetterInDraftAndDeleteTest"/>
         </classes>
     </test>
     <test name="Send empty letter test">
         <classes>
-            <class name="com.epam.selenium.tests.mail.SendEmptyLetterTest"></class>
+            <class name="com.epam.selenium.tests.mail.SendEmptyLetterTest"/>
         </classes>
     </test>
     <test name="Send full letter test">
         <classes>
-            <class name="com.epam.selenium.tests.mail.SendFullLetterTest"></class>
+            <class name="com.epam.selenium.tests.mail.SendFullLetterTest"/>
         </classes>
     </test>
     <test name="Send letter only with address test">
         <classes>
-            <class name="com.epam.selenium.tests.mail.SendLetterOnlyWithAddressTest"></class>
+            <class name="com.epam.selenium.tests.mail.SendLetterOnlyWithAddressTest"/>
         </classes>
     </test>
 </suite>

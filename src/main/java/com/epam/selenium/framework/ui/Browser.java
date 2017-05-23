@@ -2,10 +2,13 @@ package com.epam.selenium.framework.ui;
 
 import com.epam.selenium.framework.config.GlobalConfig;
 import com.epam.selenium.framework.reporting.Logger;
+import com.epam.selenium.framework.utils.FileService;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.internal.WrapsDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
@@ -19,8 +22,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
-import static org.openqa.selenium.support.ui.ExpectedConditions.elementToBeClickable;
-import static org.openqa.selenium.support.ui.ExpectedConditions.visibilityOf;
+import static org.openqa.selenium.support.ui.ExpectedConditions.*;
 
 public class Browser implements WrapsDriver {
     private static final byte COMMON_ELEMENT_WAIT_TIME_OUT = 15;
@@ -103,20 +105,20 @@ public class Browser implements WrapsDriver {
     }
 
     private WebDriver localChromeDriver() {
-//        Map<String, Object> prefs = new HashMap<>();
-//        prefs.put("profile.default_content_settings.popups", 0);
-//        prefs.put("download.prompt_for_download", "false");
-//        prefs.put("download.default_directory", FileService.PATH_FOR_DOWNLOADING);
-//        prefs.put("download.directory_upgrade", true);
-//        ChromeOptions options = new ChromeOptions();
-//        options.setExperimentalOption("prefs", prefs);
+        Map<String, Object> prefs = new HashMap<>();
+        prefs.put("profile.default_content_settings.popups", 0);
+        prefs.put("download.prompt_for_download", "false");
+        prefs.put("download.default_directory", FileService.PATH_FOR_DOWNLOADING);
+        prefs.put("download.directory_upgrade", true);
+        ChromeOptions options = new ChromeOptions();
+        options.setExperimentalOption("prefs", prefs);
         if ("".equals(GlobalConfig.getInstance().getSeleniumHub()) || GlobalConfig.getInstance().getSeleniumHub() == null)
-            return new ChromeDriver(DesiredCapabilities.chrome());
+            return new ChromeDriver(options);
         else {
-//            DesiredCapabilities capabilities = BrowserType.CHROME.getCapabilities();
-//            capabilities.setCapability(ChromeOptions.CAPABILITY, options);
+            DesiredCapabilities capabilities = BrowserType.CHROME.getCapabilities();
+            capabilities.setCapability(ChromeOptions.CAPABILITY, options);
             try {
-                return new RemoteWebDriver(new URL(GlobalConfig.getInstance().getSeleniumHub()), DesiredCapabilities.chrome());
+                return new RemoteWebDriver(new URL(GlobalConfig.getInstance().getSeleniumHub()), capabilities);
             } catch (MalformedURLException e) {
             	Logger.error(e.getMessage(), e);
             	throw new RuntimeException(e.getMessage(), e);
@@ -207,6 +209,20 @@ public class Browser implements WrapsDriver {
         Logger.debug("Waiting for element:" + element.toString());
         waitForElementIsAppear(element, driver);
 //        screenshot();
+    }
+
+    public boolean isDisplayed(final By locator) {
+        Logger.debug("Waiting for element by locator: " + locator.toString());
+        waitForPageIsLoad(driver);
+        boolean isPresent = !driver.findElements(locator).isEmpty();
+        Logger.debug(isPresent ? "Is" : "Isn't" + " present element: " + locator.toString());
+        return isPresent;
+    }
+
+    private static void waitForPageIsLoad(final WebDriver driver) {
+        Logger.debug("Waiting for page load.");
+        new WebDriverWait(driver, COMMON_ELEMENT_WAIT_TIME_OUT).until(d ->
+                ((JavascriptExecutor) d).executeScript("return document.readyState").equals("complete"));
     }
 
     private static WebElement waitForElementIsAppear(WebElement element, WebDriver driver) {

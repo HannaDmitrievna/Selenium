@@ -25,10 +25,10 @@ public class LoginWithWrongPasswordUsingDPTest extends BaseMailTest {
     @DataProvider(name = "valuesDp")
     public static Object[][] valuesForCheck() {
         return new Object[][]{
-                {"1234567890"}/*,
+                {"1234567890"},
                 {"qwertyuiop"},
                 {"1234qwer"},
-                {"1q2e3r4t"}*/
+                {"1q2e3r4t"}
         };
     }
 }
