@@ -18,13 +18,13 @@ public class ComposePage extends BasePage {
     @FindBy(id = "compose-send_ifr")
     private WebElement postFrame;
 
-    @FindBy(id = "compose-submit")
+    @FindBy(xpath = "//div[@data-key='view=compose-send-button-complex']/button")
     private WebElement submitButton;
 
     @FindBy(css = "div[data-compose-type='letter postcard'] .b-compose-message__actions__helper_saved")
     private WebElement savingNotification;
 
-    @FindBy(css = "span.b-notification__i")
+    @FindBy(xpath = "//div[contains(@class, 'mail-Compose-Field-Notices-Items')]/div")
     private WebElement notification;
 
     public void enterAddress(String email) {
@@ -59,6 +59,7 @@ public class ComposePage extends BasePage {
 
     public boolean isNotificationPresent() {
         Logger.debug("Waiting notification presenting");
+        browser.waitElement(notification);
         return notification.isEnabled();
     }
 
