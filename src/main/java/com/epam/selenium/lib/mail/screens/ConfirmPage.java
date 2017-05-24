@@ -1,16 +1,13 @@
 package com.epam.selenium.lib.mail.screens;
 
-import com.epam.selenium.framework.reporting.Logger;
 import com.epam.selenium.framework.screen.BasePage;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.By;
 
 public class ConfirmPage extends BasePage {
-    @FindBy(xpath = "//a[@class='b-statusline__link']")
-    private WebElement confirmationMessage;
 
-    public String returnLetterLink() {
-        Logger.debug("Return letter link");
-        return browser.getAttribute(confirmationMessage, "href");
+    private final static By SUCCESS_SENT_LETTER_LOCATOR = By.xpath("//div[contains(@class, 'mail-Done-Title')]");
+
+    public boolean isLetterSent() {
+        return browser.isDisplayed(SUCCESS_SENT_LETTER_LOCATOR);
     }
 }

@@ -1,13 +1,15 @@
 package com.epam.selenium.lib.mail.services;
 
 import com.epam.selenium.framework.reporting.Logger;
-import com.epam.selenium.lib.mail.screens.*;
+import com.epam.selenium.lib.mail.Letter;
 import com.epam.selenium.lib.mail.LetterBuilder;
+import com.epam.selenium.lib.mail.screens.*;
 import org.openqa.selenium.support.PageFactory;
 
 import static com.epam.selenium.framework.ui.Browser.current;
 
 public class MailService {
+
     public static void sendFullLetter() {
         Logger.info("Sending full letter");
         ComposePage composePage = PageFactory.initElements(current().getWrappedDriver(), ComposePage.class);
@@ -37,20 +39,19 @@ public class MailService {
         InboxPage inboxPage = PageFactory.initElements(current().getWrappedDriver(), InboxPage.class);
         inboxPage.goToLetterForm();
         ComposePage composePage = PageFactory.initElements(current().getWrappedDriver(), ComposePage.class);
-        composePage.enterAddress(LetterBuilder.getLetter().getAddress());
-        composePage.enterSubject(LetterBuilder.getLetter().getSubject());
-        composePage.switchToPostFrame();
-        composePage.enterPost(LetterBuilder.getLetter().getPost());
-        composePage.switchToMainFrame();
+        final Letter letter = LetterBuilder.getLetter();
+
+        composePage.enterAddress(letter.getAddress());
+        composePage.enterSubject(letter.getSubject());
+        composePage.enterPost(letter.getPost());
     }
 
-    public static boolean isLetterPresentIntoInboxAndOutbox() {
-        Logger.info("Checking presenting letter it inbox and outbox");
-        ConfirmPage confirmPage = PageFactory.initElements(current().getWrappedDriver(), ConfirmPage.class);
-        InboxPage inboxPage = PageFactory.initElements(current().getWrappedDriver(), InboxPage.class);
-        OutboxPage outboxPage = PageFactory.initElements(current().getWrappedDriver(), OutboxPage.class);
-        String mailLink = confirmPage.returnLetterLink();
-        return inboxPage.isLetterPresent(mailLink.substring(mailLink.indexOf("#"))) && outboxPage.isLetterPresent(mailLink.substring(mailLink.indexOf("#")));
+    public static boolean isLetterSent() {
+
+        Logger.info("Checking if the letter was sent");
+        final ConfirmPage confirmPage = new ConfirmPage();
+
+        return confirmPage.isLetterSent();
     }
 
     public static boolean isNotificationPresent() {

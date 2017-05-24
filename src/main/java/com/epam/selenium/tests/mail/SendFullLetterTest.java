@@ -5,7 +5,7 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import static com.epam.selenium.lib.mail.services.MailService.isLetterPresentIntoInboxAndOutbox;
+import static com.epam.selenium.lib.mail.services.MailService.isLetterSent;
 import static com.epam.selenium.lib.mail.services.MailService.sendFullLetter;
 
 public class SendFullLetterTest extends BaseMailTest {
@@ -18,6 +18,6 @@ public class SendFullLetterTest extends BaseMailTest {
     @Test(description = "Checking sending of full letter")
     public void checkSendFullLetter() throws InterruptedException {
         sendFullLetter();
-        Assert.assertTrue(isLetterPresentIntoInboxAndOutbox());
+        Assert.assertTrue(isLetterSent());
     }
 }

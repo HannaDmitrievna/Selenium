@@ -5,7 +5,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import static com.epam.selenium.lib.mail.services.LoginService.enterWithRightCredential;
-import static com.epam.selenium.lib.mail.services.MailService.isLetterPresentIntoInboxAndOutbox;
+import static com.epam.selenium.lib.mail.services.MailService.isLetterSent;
 import static com.epam.selenium.lib.mail.services.MailService.sendLetterWithAddress;
 
 public class SendLetterOnlyWithAddressTest extends BaseMailTest {
@@ -17,6 +17,6 @@ public class SendLetterOnlyWithAddressTest extends BaseMailTest {
     @Test(description = "Checking sending of letter with address")
     public void checkSendLetterWithAddress() {
         sendLetterWithAddress();
-        Assert.assertTrue(isLetterPresentIntoInboxAndOutbox());
+        Assert.assertTrue(isLetterSent());
     }
 }

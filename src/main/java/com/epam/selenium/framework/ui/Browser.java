@@ -4,7 +4,6 @@ import com.epam.selenium.framework.config.GlobalConfig;
 import com.epam.selenium.framework.reporting.Logger;
 import com.epam.selenium.framework.utils.FileService;
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -22,7 +21,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
-import static org.openqa.selenium.support.ui.ExpectedConditions.*;
+import static org.openqa.selenium.support.ui.ExpectedConditions.elementToBeClickable;
+import static org.openqa.selenium.support.ui.ExpectedConditions.visibilityOf;
+import static org.openqa.selenium.support.ui.ExpectedConditions.visibilityOfElementLocated;
 
 public class Browser implements WrapsDriver {
     private static final byte COMMON_ELEMENT_WAIT_TIME_OUT = 15;
@@ -134,27 +135,23 @@ public class Browser implements WrapsDriver {
     public void open(String url) {
         Logger.debug("Open page : " + url);
         getWrappedDriver().get(url);
-//        screenshot();
     }
 
     public void type(WebElement element, String text) {
         Logger.debug("Write text to : " + element.toString() + " text = '" + text + "'");
         waitForElementIsAppear(element, driver);
         element.sendKeys(text);
-//        screenshot();
     }
 
     public void click(WebElement element) {
         Logger.debug("Click to : " + element.toString());
         waitForElementIsAppear(element, driver);
         element.click();
-//        screenshot();
     }
 
     public String getText(WebElement element) {
         Logger.debug("Read text from : " + element.toString());
         waitForElementIsAppear(element, driver);
-//        screenshot();
         return element.getText();
     }
 
@@ -168,14 +165,12 @@ public class Browser implements WrapsDriver {
         Logger.debug("Switch to: " + element.toString());
         waitForElementIsAppear(element, driver);
         driver.switchTo().frame(element);
-//        screenshot();
     }
 
     public boolean isPresent(By locator) {
         Logger.debug("Is present element: " + locator.toString());
         WebElement element = driver.findElement(locator);
         waitForElementIsAppear(element, driver);
-//        screenshot();
         return element.isEnabled();
     }
 
@@ -188,7 +183,6 @@ public class Browser implements WrapsDriver {
                 result = true;
             }
         }
-//        screenshot();
         return result;
     }
 
@@ -197,46 +191,29 @@ public class Browser implements WrapsDriver {
         driver.navigate().refresh();
     }
 
-
-    public String getAttribute(WebElement element, String attribute) {
-        Logger.debug("Getting attribute " + attribute + " in" + element.toString());
-        waitForElementIsAppear(element, driver);
-//        screenshot();
-        return element.getAttribute(attribute);
-    }
-
     public void waitElement(WebElement element) {
         Logger.debug("Waiting for element:" + element.toString());
         waitForElementIsAppear(element, driver);
-//        screenshot();
     }
 
     public boolean isDisplayed(final By locator) {
-        Logger.debug("Waiting for element by locator: " + locator.toString());
-        waitForPageIsLoad(driver);
+        Logger.debug("Waiting for present element: " + locator.toString());
+        new WebDriverWait(driver, COMMON_ELEMENT_WAIT_TIME_OUT).until(visibilityOfElementLocated(locator));
         boolean isPresent = !driver.findElements(locator).isEmpty();
-        Logger.debug(isPresent ? "Is" : "Isn't" + " present element: " + locator.toString());
+        Logger.debug((isPresent ? "Is" : "Isn't") + " present element: " + locator.toString());
         return isPresent;
-    }
-
-    private static void waitForPageIsLoad(final WebDriver driver) {
-        Logger.debug("Waiting for page load.");
-        new WebDriverWait(driver, COMMON_ELEMENT_WAIT_TIME_OUT).until(d ->
-                ((JavascriptExecutor) d).executeScript("return document.readyState").equals("complete"));
     }
 
     private static WebElement waitForElementIsAppear(WebElement element, WebDriver driver) {
         Logger.debug("Waiting for element appear: " + element.toString());
         new WebDriverWait(driver, COMMON_ELEMENT_WAIT_TIME_OUT).until(visibilityOf(element));
         new WebDriverWait(driver, COMMON_ELEMENT_WAIT_TIME_OUT).until(elementToBeClickable(element));
-//        screenshot();
         return element;
     }
 
     private static WebElement waitForElementIsClickable(WebElement element, WebDriver driver) {
         Logger.debug("Waiting for element is clickable: " + element.toString());
         new WebDriverWait(driver, COMMON_ELEMENT_WAIT_TIME_OUT).until(elementToBeClickable(element));
-//        screenshot();
         return element;
     }
 

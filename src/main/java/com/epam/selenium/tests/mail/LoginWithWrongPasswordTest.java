@@ -9,7 +9,7 @@ import static org.testng.Assert.assertTrue;
 public class LoginWithWrongPasswordTest extends BaseMailTest {
 
     private static final String EXPECTED_ERROR_MESSAGE_IN_CASE_WRONG_PASS_1 = "Неправильный логин или пароль.";
-    private static final String EXPECTED_ERROR_MESSAGE_IN_CASE_WRONG_PASS_2 = "Неверный пароль.";
+    private static final String EXPECTED_ERROR_MESSAGE_IN_CASE_WRONG_PASS_2 = "Неверный пароль";
 
     @Test(description = "Check expected error message in case of wrong password")
     public void checkErrorMessageWrongPassword() {
