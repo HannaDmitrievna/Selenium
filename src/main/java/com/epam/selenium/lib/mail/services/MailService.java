@@ -27,10 +27,13 @@ public class MailService {
 
     public static void sendLetterWithAddress() {
         Logger.info("Sending letter with address");
+
         InboxPage inboxPage = PageFactory.initElements(current().getWrappedDriver(), InboxPage.class);
         inboxPage.goToLetterForm();
+
         ComposePage composePage = PageFactory.initElements(current().getWrappedDriver(), ComposePage.class);
         composePage.enterAddress(LetterBuilder.getLetter().getAddress());
+
         composePage.clickOnSendButton();
     }
 
@@ -62,45 +65,54 @@ public class MailService {
 
     public static boolean saveLetterInDraftAndCheckIt() {
         Logger.info("Saving letter in draft");
-        String subject = LetterBuilder.getLetter().getSubject();
-        InboxPage inboxPage = PageFactory.initElements(current().getWrappedDriver(), InboxPage.class);
+
+        final String subject = LetterBuilder.getLetter().getSubject();
+        final InboxPage inboxPage = PageFactory.initElements(current().getWrappedDriver(), InboxPage.class);
         inboxPage.goToLetterForm();
-        ComposePage composePage = PageFactory.initElements(current().getWrappedDriver(), ComposePage.class);
+
+        final ComposePage composePage = PageFactory.initElements(current().getWrappedDriver(), ComposePage.class);
         composePage.enterAddress(LetterBuilder.getLetter().getAddress());
         composePage.enterSubject(subject);
-        composePage.switchToPostFrame();
         composePage.enterPost(LetterBuilder.getLetter().getPost());
-        composePage.switchToMainFrame();
-        DraftPage draftPage = PageFactory.initElements(current().getWrappedDriver(), DraftPage.class);
+
+        final DraftPage draftPage = PageFactory.initElements(current().getWrappedDriver(), DraftPage.class);
+
         composePage.isSavingNotificationPresent();
         draftPage.open();
+
         return draftPage.isLetterPresent(subject) && deleteLetterAndCheckIt(subject);
     }
 
     private static boolean deleteLetterAndCheckIt(String subject) {
         Logger.info("Deleting letter");
+
         boolean isLetterInDraftAfterDeleting;
         boolean isLetterInTrash;
         boolean isLetterInTrashAfterDeleting;
-        DraftPage draftPage = PageFactory.initElements(current().getWrappedDriver(), DraftPage.class);
+
+        final DraftPage draftPage = PageFactory.initElements(current().getWrappedDriver(), DraftPage.class);
         draftPage.selectCheckbox(subject);
         draftPage.clickDelete();
+
         try {
             isLetterInDraftAfterDeleting = draftPage.isLetterPresent(subject);
         } catch (Exception ex) {
             Logger.error(ex.getMessage(), ex);
             isLetterInDraftAfterDeleting = false;
         }
-        TrashPage trashPage = PageFactory.initElements(current().getWrappedDriver(), TrashPage.class);
+
+        final TrashPage trashPage = PageFactory.initElements(current().getWrappedDriver(), TrashPage.class);
         isLetterInTrash = trashPage.isLetterPresent(subject);
         trashPage.clickOnClearTrash();
         trashPage.confirmClearingTrash();
+
         try {
             isLetterInTrashAfterDeleting = trashPage.isLetterPresent(subject);
         } catch (Exception ex) {
             Logger.error(ex.getMessage(), ex);
             isLetterInTrashAfterDeleting = false;
         }
+
         return !isLetterInDraftAfterDeleting && isLetterInTrash && !isLetterInTrashAfterDeleting;
     }
 }

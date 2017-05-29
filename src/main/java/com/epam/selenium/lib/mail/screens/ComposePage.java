@@ -21,7 +21,7 @@ public class ComposePage extends BasePage {
     @FindBy(xpath = "//div[@data-key='view=compose-send-button-complex']/button")
     private WebElement submitButton;
 
-    @FindBy(css = "div[data-compose-type='letter postcard'] .b-compose-message__actions__helper_saved")
+    @FindBy(xpath = "//span[@class='mail-ui-Link mail-ui-Link_minor']")
     private WebElement savingNotification;
 
     @FindBy(xpath = "//div[contains(@class, 'mail-Compose-Field-Notices-Items')]/div")

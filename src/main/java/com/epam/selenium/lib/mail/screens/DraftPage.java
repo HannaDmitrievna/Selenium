@@ -10,11 +10,12 @@ public class DraftPage extends BasePage {
     @FindBy(css = "[data-action='delete']")
     private WebElement deleteButton;
 
-    @FindBy(css = "a[href$='#draft']")
+    @FindBy(xpath = "//a[@href='#draft']")
     private WebElement draftPageLink;
 
-    private static final String CHECKBOX_LOCATOR_PATTERN = "//*[@title='%s']/../../../../../../label/input[@type='checkbox']";
-    private static final String SUBJECT_LOCATOR_PATTERN = "span[title='%s']";
+    private static final String CHECKBOX_LOCATOR_PATTERN =
+            "//span[contains(@class, 'mail-MessageSnippet-Item')]//span[text()='%s']/../../../../preceding-sibling::span//label";
+    private static final String SUBJECT_LOCATOR_PATTERN = "//span[text()='%s']";
 
     public void open() {
         Logger.debug("Open draft page");
@@ -35,6 +36,6 @@ public class DraftPage extends BasePage {
     public boolean isLetterPresent(String subject) {
         Logger.debug("Checking presenting letter in draft");
         open();
-        return browser.isPresent(By.cssSelector(String.format(SUBJECT_LOCATOR_PATTERN, subject)));
+        return browser.isPresent(By.xpath(String.format(SUBJECT_LOCATOR_PATTERN, subject)));
     }
 }
