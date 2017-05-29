@@ -20,6 +20,7 @@
         <agent.java.testng.version>3.0.0</agent.java.testng.version>
         <logger.java.logback.version>3.0.0</logger.java.logback.version>
         <logger.java.log4j.version>3.0.0</logger.java.log4j.version>
+        <slf4j.api.version>1.7.25</slf4j.api.version>
     </properties>
 
     <build>
@@ -113,11 +114,6 @@
         </dependency>
         <dependency>
             <groupId>com.epam.reportportal</groupId>
-            <artifactId>logger-java-logback</artifactId>
-            <version>${logger.java.logback.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.epam.reportportal</groupId>
             <artifactId>logger-java-log4j</artifactId>
             <version>${logger.java.log4j.version}</version>
         </dependency>
@@ -125,6 +121,17 @@
             <groupId>log4j</groupId>
             <artifactId>log4j</artifactId>
             <version>${log4j.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>${slf4j.api.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-simple</artifactId>
+            <version>${slf4j.api.version}</version>
         </dependency>
     </dependencies>
 
